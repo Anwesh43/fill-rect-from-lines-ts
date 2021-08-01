@@ -22,7 +22,7 @@ class ScaleUtil {
     }
 
     static divideScale(scale : number, i : number, n : number) : number {
-        return Math.min(1 / n, ScaleUtil.divideScale(scale, i, n)) * n 
+        return Math.min(1 / n, ScaleUtil.maxScale(scale, i, n)) * n 
     }
 }
 
@@ -189,7 +189,7 @@ class FRLNode {
 
 class FillRectFromLines {
 
-    curr : FRLNode 
+    curr : FRLNode = new FRLNode(0)
     dir : number = 1
 
     draw(context : CanvasRenderingContext2D) {
