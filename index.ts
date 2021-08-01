@@ -205,3 +205,25 @@ class FillRectFromLines {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    frl : FillRectFromLines = new FillRectFromLines()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.frl.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.frl.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.frl.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+}
